@@ -6,7 +6,7 @@ const Card = ({ item }) => {
   return (
     <div className="max-w-full md:max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 h-full flex flex-col">
       <a href="#">
-        <img className="rounded-t-lg" src={item?.img} alt />
+        <img className="rounded-t-lg" src={item?.img} alt='#' />
       </a>
       <div className="p-5 flex-1 flex flex-col">
         <div className="flex justify-between items-center">

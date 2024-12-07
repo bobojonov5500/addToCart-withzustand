@@ -45,7 +45,7 @@ const Home = () => {
   };
 
   return (
-    <div className="max-w-full px-8 my-6">
+    <div className="max-w-[1200px] mx-auto px-8 my-6">
       {isLoading ? (
         <Loader />
       ) : (

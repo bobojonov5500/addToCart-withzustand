@@ -1,13 +1,15 @@
 import React from "react";
 import useCartStore from "../store/cart-store";
+import { useNavigate } from "react-router-dom";
 
 const Card = ({ item }) => {
+  const navigate = useNavigate();
   const addToCart = useCartStore((state) => state.addToCart);
   return (
     <div className="max-w-full md:max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 h-full flex flex-col">
-      <a href="#">
-        <img className="rounded-t-lg" src={item?.img} alt='#' />
-      </a>
+      <div>
+        <img className="rounded-t-lg" src={item?.img} alt="#" />
+      </div>
       <div className="p-5 flex-1 flex flex-col">
         <div className="flex justify-between items-center">
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
@@ -28,7 +30,10 @@ const Card = ({ item }) => {
             Add to Cart
           </button>
 
-          <button className="border rounded-lg border-yellow-600 text-yellow-600 px-2 py-1 hover:bg-yellow-600 hover:text-white hover:shadow-[0_10px_15px_rgba(251,191,36,0.5)] transition-all duration-300">
+          <button
+            onClick={() => navigate(`/product/${item?.id}`)}
+            className="border rounded-lg border-yellow-600 text-yellow-600 px-2 py-1 hover:bg-yellow-600 hover:text-white hover:shadow-[0_10px_15px_rgba(251,191,36,0.5)] transition-all duration-300"
+          >
             See More
           </button>
         </div>

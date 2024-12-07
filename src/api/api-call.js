@@ -7,7 +7,10 @@ const ApiCalling = {
     const { data } = await axios.get(BASE_URL);
     return data;
   },
-  
+  getPost: async (id) => {
+    const { data } = await axios.get(`${BASE_URL}/${id}`);
+    return data;
+  },
 };
 
 export default ApiCalling;

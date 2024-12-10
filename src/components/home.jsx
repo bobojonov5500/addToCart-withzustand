@@ -29,6 +29,7 @@ const Home = () => {
     data?.filter((item) => {
       return item.name.toLowerCase().includes(searchTerm.toLowerCase());
     }) || [];
+    
   useEffect(() => {
     if (searchTerm === "") {
       searchParams.delete("search");

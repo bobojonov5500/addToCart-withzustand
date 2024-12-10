@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 const Card = ({ item }) => {
   const navigate = useNavigate();
-  const addToCart = useCartStore((state) => state.addToCart);
   return (
     <div className="max-w-full md:max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 h-full flex flex-col">
       <div>
@@ -24,7 +23,6 @@ const Card = ({ item }) => {
         </p>
         <div className="flex text-[15px]   mt-5 justify-between">
           <button
-            onClick={() => addToCart(item)}
             className="border hover:shadow-[0_10px_15px_rgba(72,187,120,0.5)] rounded-lg px-2 py-1 border-green-500 text-green-500 hover:bg-green-500 hover:text-white transition-all duration-300"
           >
             Add to Cart

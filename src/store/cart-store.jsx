@@ -5,37 +5,46 @@ import { persist } from "zustand/middleware";
 const useCartStore = create(
   persist((set) => ({
     cart: [],
-    addToCart: (product) =>
+    addToCart: (product_id) =>
       set((state) => {
-        const alreadyInCart = state.cart.some(
-          (cartItem) => cartItem.id === product.id
-        );
+        const alreadyInCart = state.cart.some((item) => item.id === product_id);
         if (!alreadyInCart) {
-          toast.success(`${product?.name} added to cart`, {
-            position: "top-right",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-          return { cart: [...state.cart, product] };
+          return { cart: [...state.cart, { id: product_id, quantity: 1 }] };
+        } else {
+          return {
+            cart: state.cart.map((item) =>
+              item.id === product_id
+                ? { ...item, quantity: item.quantity + 1 }
+                : item
+            ),
+          };
         }
-        toast.error(`${product?.name} already in cart`, {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-        return state;
       }),
-    removeFromCart: (product_id) =>
+    QuantityMinus: (product_id) =>
+      set((state) => {
+        const product = state.cart.find((item) => item.id === product_id);
+        if (!product) {
+          return state;
+        }
+        if (product.quantity > 1) {
+          return {
+            ...state,
+            cart: state.cart.map((item) =>
+              item.id === product_id
+                ? { ...item, quantity: item.quantity - 1 }
+                : item
+            ),
+          };
+        }
+        return {
+          ...state,
+          cart: state.cart.filter((item) => item.id !== product_id),
+        };
+      }),
+    removeProductFromCart: (product_id) =>
       set((state) => ({
-        cart: state.cart.filter((product) => product.id !== product_id),
+        ...state,
+        cart: state.cart.filter((item) => item.id !== product_id),
       })),
     clearCart: () => set({ cart: [] }),
   })),

@@ -6,7 +6,7 @@ const Navbar = () => {
   const cart = useCartStore((state) => state.cart);
   return (
     <div className="bg-green-500">
-      <div className="flex  max-w-[1200px] mx-auto py-3 justify-between items-center ">
+      <div className="flex  max-w-[1200px] px-4 min-w-custom:px-0 mx-auto py-3 justify-between items-center ">
         <Link to="/" className="font-bold">
           Home
         </Link>

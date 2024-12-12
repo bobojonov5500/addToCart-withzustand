@@ -8,6 +8,7 @@ import { useSearchParams } from "react-router-dom";
 import whyDidYouRender from "@welldone-software/why-did-you-render";
 import ReactPaginate from "react-paginate";
 import PaginateLabel from "../ui/pagination";
+import CardSkeleton from "../ui/cardSkeleton";
 
 const Home = () => {
   const [itemOffset, setItemOffset] = useState(0);
@@ -29,7 +30,7 @@ const Home = () => {
     data?.filter((item) => {
       return item.name.toLowerCase().includes(searchTerm.toLowerCase());
     }) || [];
-    
+
   useEffect(() => {
     if (searchTerm === "") {
       searchParams.delete("search");
@@ -46,21 +47,20 @@ const Home = () => {
   };
 
   return (
-    <div className="max-w-[1200px] mx-auto px-8 my-6">
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <>
-          <Input search={searchTerm} setSearch={setSearchParams} />
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-4">
-            {currentItems.length > 0 ? (
-              currentItems?.map((item) => <Card key={item.id} item={item} />)
-            ) : (
-              <div className="text-center  text-[20px]">not found!</div>
-            )}
-          </div>
-        </>
-      )}
+    <div className="max-w-[1200px] mx-auto px-4 min-w-custom:px-0 my-6">
+      <Input search={searchTerm} setSearch={setSearchParams} />
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-4">
+        {isLoading ? (
+          Array.from({ length: itemsPerPage }).map((_, index) => (
+            <CardSkeleton key={index} />
+          ))
+        ) : currentItems.length > 0 ? (
+          currentItems?.map((item) => <Card key={item.id} item={item} />)
+        ) : (
+          <div className="text-center text-[20px]">not found!</div>
+        )}
+      </div>
+
       <div className="flex justify-center mt-6">
         <PaginateLabel
           pageCount={pageCount}

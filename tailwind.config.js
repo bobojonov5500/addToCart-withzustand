@@ -18,6 +18,10 @@ export default {
           "950": "#172554",
         },
       },
+
+      screens: {
+        "min-w-custom": "1200px",
+      },
     },
     fontFamily: {
       body: [

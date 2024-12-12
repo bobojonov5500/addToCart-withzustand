@@ -22,11 +22,11 @@ const Card = ({ item }) => {
           {item?.description}
         </p>
         <div className="flex text-[15px]   mt-5 justify-between">
-          <button
+          {/* <button
             className="border hover:shadow-[0_10px_15px_rgba(72,187,120,0.5)] rounded-lg px-2 py-1 border-green-500 text-green-500 hover:bg-green-500 hover:text-white transition-all duration-300"
           >
             Add to Cart
-          </button>
+          </button> */}
 
           <button
             onClick={() => navigate(`/product/${item?.id}`)}

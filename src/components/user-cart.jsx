@@ -35,7 +35,7 @@ const Cart = () => {
     );
   }
   return (
-    <div className="max-w-[1200px] my-8  mx-auto">
+    <div className="max-w-[1200px] my-8 px-4 min-w-custom:px-0 mx-auto">
       {isLoading ? (
         <Loader />
       ) : (
